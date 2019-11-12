@@ -10,7 +10,7 @@ AnalogIn Analog(A0);
 float mitattuJannite=0.0;
 float resisX = 0.0;   //kOhm
 float resisKiintea = 12.0; //kOhm
-int kayttoJannite = 3.3;
+float kayttoJannite = 3.3;
 float lampotila = 0.0;
 
 int main()
@@ -23,10 +23,12 @@ timer.reset();
 			      
                 mitattuJannite = Analog.read() * 4095;  
 				mitattuJannite = mitattuJannite*kayttoJannite / 4095;
+				
 				resisX = resisKiintea*(kayttoJannite / mitattuJannite - 1);
 				
-				lampotila = -0.0006378702 * resisX * resisX * resisX * resisX + 0.0188925779 * resisX * resisX * resisX - 0.0015604745*resisX * resisX - 5.4012695435*resisX + 66.6828443378;
-				pc.printf("%f",lampotila);
+				//kuudennen asteen yhtälö välillä 11-30 celsiusastetta
+				lampotila =  -0.0000691587 * resisX * resisX * resisX * resisX * resisX * resisX + 0.0051836483 * resisX * resisX * resisX * resisX * resisX - 0.1591504122 * resisX * resisX * resisX * resisX + 2.5476082216 * resisX * resisX * resisX - 22.1794229228 * resisX * resisX + 95.9356475493 * resisX - 121.7370727433;
+				pc.printf("%3.3f",lampotila);
 				pc.printf("\r\n");
 				
 				wait(0.5);

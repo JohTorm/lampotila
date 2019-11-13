@@ -2,7 +2,7 @@
 
 
 Timer timer;
-Serial pc(USBTX,USBRX);
+Serial pc(PC_4, PC_5, 9600); //datan lahettamista nucleolle varten vaihdettu USBRX,USBTX
 
 AnalogIn Analog(A0);
 
@@ -31,6 +31,6 @@ timer.reset();
 				pc.printf("%3.3f",lampotila);
 				pc.printf("\r\n");
 				
-				wait(0.5);
+				//wait(0.5);
         }
 }
